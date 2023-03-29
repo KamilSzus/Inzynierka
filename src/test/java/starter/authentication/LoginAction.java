@@ -11,4 +11,10 @@ public class LoginAction extends UIInteractionSteps {
         $(LoginForm.PASSWORD).sendKeys(user.getUserPassword());
         $(LoginForm.LOGIN_BUTTON).click();
     }
+
+    @Step("Click login button")
+    public void clickLoginButton(){
+        $(LoginForm.LOGIN_BUTTON).click();
+    }
+
 }

@@ -3,9 +3,13 @@ package starter.stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import net.serenitybdd.core.Serenity;
 import net.thucydides.core.annotations.Steps;
+import org.assertj.core.api.AssertionsForClassTypes;
 import starter.authentication.LoginAction;
+import starter.authentication.LoginPageObject;
 import starter.authentication.User;
+import starter.inventory.InventoryAction;
 import starter.navigation.NavigateTo;
 import starter.search.SearchFor;
 import starter.search.SearchResult;
@@ -16,15 +20,14 @@ public class SearchStepDefinitions {
 
     @Steps
     NavigateTo navigateTo;
-
     @Steps
     SearchFor searchFor;
-
     @Steps
     SearchResult searchResult;
-
     @Steps
     LoginAction loginAction;
+    InventoryAction inventoryAction;
+    LoginPageObject loginPageObject;
 
     @Given("^(?:.*) is researching things on the internet")
     public void i_am_on_the_Wikipedia_home_page() {
@@ -42,19 +45,38 @@ public class SearchStepDefinitions {
     }
 
     @Given("User open the shop page")
-    public void i_am_on_the_shop_page(){
+    public void i_am_on_the_shop_page() {
         navigateTo.theSourceHomePage();
     }
 
     @When("User insert correct credential and try login")
-    public void i_am_sucesfully_login_to_the_page_shop(){
+    public void i_am_sucesfully_login_to_the_page_shop() {
         loginAction.loginAS(User.STANDARD_USER);
+    }
+
+    @When("User insert incorrect {string} and try login")
+    public void i_am_see_error_message_on_login_page(String data) {
+        User user;
+
+        switch (data){
+            case "username" -> user = User.INCORRECT_USERNAME_USER;
+            case "password" -> user = User.INCORRECT_PASSWORD_USER;
+            default -> user = User.INCORRECT_USER;
+        }
+
+        loginAction.loginAS(user);
     }
 
     @Then("User should see main page")
-    public void i_am_sucesfully(){
-        loginAction.loginAS(User.STANDARD_USER);
+    public void i_am_sucesfully() {
+        Serenity.reportThat("Check if heading is equal to \"Products\" ", () ->
+                AssertionsForClassTypes.assertThat(inventoryAction.getHeading()).isEqualToIgnoringCase("Products"));
     }
 
+    @Then("User see error message on login page that contains this message {string}")
+    public void i_am_see_error(String errorMessage) {
+        Serenity.reportThat("Check if error message is equal to \"" + errorMessage + "\" ", () ->
+                AssertionsForClassTypes.assertThat(loginPageObject.getErrorMessage()).isEqualToIgnoringCase(errorMessage));
+    }
 }
 
