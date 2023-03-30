@@ -78,5 +78,46 @@ public class SearchStepDefinitions {
         Serenity.reportThat("Check if error message is equal to \"" + errorMessage + "\" ", () ->
                 AssertionsForClassTypes.assertThat(loginPageObject.getErrorMessage()).isEqualToIgnoringCase(errorMessage));
     }
+
+    @When("Clicks login button")
+    public void clicksLoginButton() {
+    }
+
+    @When("User insert {string}")
+    public void userInsert(String arg0) {
+
+    }
+
+    @When("User insert incorrect credential")
+    public void userInsertIncorrectCredential() {
+    }
+
+    @When("Get error message")
+    public void getErrorMessage() {
+    }
+
+    @When("Try close this message")
+    public void tryCloseThisMessage() {
+    }
+
+    @Then("Error message should disappear")
+    public void errorMessageShouldDisappear() {
+    }
+
+    @Given("User is login on the main page")
+    public void userIsLoginOnTheMainPage() {
+    }
+
+    @Given("Click on hamburger menu")
+    public void clickOnHamburgerMenu() {
+    }
+
+    @Then("Click on logout")
+    public void clickOnLogout() {
+    }
+
+    @When("Refresh browser")
+    public void refreshBrowser() {
+    }
 }
 
