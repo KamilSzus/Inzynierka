@@ -39,7 +39,7 @@ Feature: Authentication
   Scenario: After logout active session should expire
     Given User is login on the main page
     And Click on hamburger menu
-    Then Click on logout
+    Then Click on "logout" button in menu
     And Refresh browser
     And Clicks login button
-    Then User see error message on login page that contains this message "Epic sadface: Username and password do not match any user in this service"
+    Then User see error message on login page that contains this message "Epic sadface: Username is required"

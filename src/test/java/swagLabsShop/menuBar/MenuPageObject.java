@@ -1,14 +1,20 @@
 package swagLabsShop.menuBar;
 
-import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
+import org.openqa.selenium.By;
 
 public class MenuPageObject extends PageObject {
-    public By getHamburgerMenu() {
-        return find(By.id("react-burger-menu-btn"));
+
+    public static By getHamburgerMenu() {
+        return By.id("react-burger-menu-btn");
     }
 
-    public By getCloseMenuButton() {
-        return find(By.id("react-burger-cross-btn"));
+    public static By getCloseMenuButton() {
+        return By.id("react-burger-cross-btn");
     }
+
+    public static By clickOnButtonInMenu(String buttonName) {
+        return By.id(buttonName + "_sidebar_link");
+    }
+
 }

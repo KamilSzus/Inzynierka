@@ -4,12 +4,15 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.core.Serenity;
+import net.serenitybdd.screenplay.actions.Browser;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.AssertionsForClassTypes;
+import org.openqa.selenium.WebDriver;
 import swagLabsShop.authentication.LoginAction;
 import swagLabsShop.authentication.LoginPageObject;
 import swagLabsShop.authentication.User;
 import swagLabsShop.inventory.InventoryAction;
+import swagLabsShop.menuBar.MenuAction;
 import swagLabsShop.navigation.NavigateTo;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,11 +27,8 @@ public class SearchStepDefinitions {
     InventoryAction inventoryAction;
     @Steps
     LoginPageObject loginPageObject;
-
-    @Given("^(?:.*) is researching things on the internet")
-    public void i_am_on_the_Wikipedia_home_page() {
-        navigateTo.theHomePage();
-    }
+    @Steps
+    MenuAction menuAction;
 
     @Given("User open the shop page")
     public void i_am_on_the_shop_page() {
@@ -101,6 +101,7 @@ public class SearchStepDefinitions {
 
     @Given("User is login on the main page")
     public void userIsLoginOnTheMainPage() {
+        navigateTo.theSourceHomePage();
         loginAction.loginAS(User.STANDARD_USER);
         Serenity.reportThat("Check if heading is equal to \"Products\" ", () ->
                 AssertionsForClassTypes.assertThat(inventoryAction.getHeading()).isEqualToIgnoringCase("Products"));
@@ -108,14 +109,17 @@ public class SearchStepDefinitions {
 
     @Given("Click on hamburger menu")
     public void clickOnHamburgerMenu() {
+        menuAction.openMenu();
     }
 
-    @Then("Click on logout")
-    public void clickOnLogout() {
+    @Then("Click on {string} button in menu")
+    public void clickOnLogout(String buttonName) {
+        menuAction.clickOn(buttonName);
     }
 
     @When("Refresh browser")
     public void refreshBrowser() {
+        Browser.refreshPage();
     }
 }
 
