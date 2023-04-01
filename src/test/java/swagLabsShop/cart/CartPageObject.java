@@ -1,4 +1,4 @@
-package starter.cart;
+package swagLabsShop.cart;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -12,7 +12,7 @@ public class CartPageObject extends PageObject {
     private static By CHECKOUT_BUTTON = By.name("checkout");
     private static By CART_ITEM = By.cssSelector(".cart_item");
 
-    public void checkout(){
+    public void checkout() {
         find(CHECKOUT_BUTTON).click();
     }
 
@@ -27,7 +27,7 @@ public class CartPageObject extends PageObject {
     }
 
     private Double priceForm(String textValue) {
-        return Double.parseDouble(textValue.replace("$",""));
+        return Double.parseDouble(textValue.replace("$", ""));
     }
 }
 
