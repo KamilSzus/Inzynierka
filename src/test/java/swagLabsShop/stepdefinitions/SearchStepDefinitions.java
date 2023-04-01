@@ -1,5 +1,6 @@
 package swagLabsShop.stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -120,6 +121,31 @@ public class SearchStepDefinitions {
     @When("Refresh browser")
     public void refreshBrowser() {
         Browser.refreshPage();
+    }
+
+    @Given("Click on dropdown list")
+    public void clickOnDropdownList() {
+    }
+
+    @When("Select {string}")
+    public void select(String sortingType) {
+    }
+
+    @Then("All products should be sorted reverse alphabetical order")
+    public void allProductShouldBeSortedReverseAlphabeticalOrder() {
+    }
+
+    @Then("All products should be sorted alphabetical")
+    public void allProductsShouldBeSortedAlphabetical() {
+
+    }
+
+    @Then("All products should be sorted by lowest price")
+    public void allProductsShouldBeSortedByLowestPrice() {
+    }
+
+    @Then("All products should be sorted by highest price")
+    public void allProductsShouldBeSortedByHighestPrice() {
     }
 }
 

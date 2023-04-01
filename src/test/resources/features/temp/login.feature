@@ -5,16 +5,15 @@ Feature: Authentication
     When User insert correct credential and try login
     Then User should see main page
 
-  Scenario: User pass incorrect username
+  Scenario Outline:User pass incorrect username
     Given User open the shop page
-    When User insert incorrect "username" and try login
-    Then User see error message on login page that contains this message "Epic sadface: Username and password do not match any user in this service"
-
-  Example:
-  | data     | errorMessage                                                              |
-  | username | Epic sadface: Username and password do not match any user in this service |
-  | password | Epic sadface: Username and password do not match any user in this service |
-  | allData  | Epic sadface: Username and password do not match any user in this service |
+    When User insert incorrect "<data>" and try login
+    Then User see error message on login page that contains this message "<errorMessage>"
+    Examples:
+    | data     | errorMessage                                                              |
+    | username | Epic sadface: Username and password do not match any user in this service |
+    | password | Epic sadface: Username and password do not match any user in this service |
+    | allData  | Epic sadface: Username and password do not match any user in this service |
 
   Scenario: User try login without username
     Given User open the shop page
