@@ -2,13 +2,39 @@ package swagLabsShop.inventory;
 
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
+import swagLabsShop.cart.CartItem;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ProductList extends PageObject {
 
-    public List<String> getListOfProductsOnPage() {
+    public List<String> getListOfProductsNameOnPage() {
         return findAll(".inventory_item_name").textContents();
+    }
+
+    public List<String> getListOfProductsDescriptionOnPage() {
+        return findAll(".inventory_item_desc").textContents();
+    }
+
+    public List<String> getListOfProductsPriceOnPage() {
+        return findAll(".inventory_item_price").textContents();
+    }
+
+    public List<CartItem> getListOfAllProductsObject() {
+        List<String> productsName = getListOfProductsNameOnPage();
+        List<String> productsDescription = getListOfProductsDescriptionOnPage();
+        List<String> productsPrice = getListOfProductsPriceOnPage();
+
+        return IntStream.range(0, productsName.size())
+                .mapToObj(i -> new CartItem(
+                        productsName.get(i),
+                        productsDescription.get(i),
+                        Double.parseDouble(productsPrice.get(i).replace("$",""))
+                ))
+                .collect(Collectors.toList());
     }
 
     public static By productDetailsLinkFor(String productName) {

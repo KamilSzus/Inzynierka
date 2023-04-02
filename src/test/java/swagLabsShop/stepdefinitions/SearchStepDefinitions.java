@@ -1,6 +1,5 @@
 package swagLabsShop.stepdefinitions;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,13 +7,19 @@ import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.actions.Browser;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.AssertionsForClassTypes;
-import org.openqa.selenium.WebDriver;
 import swagLabsShop.authentication.LoginAction;
 import swagLabsShop.authentication.LoginPageObject;
 import swagLabsShop.authentication.User;
+import swagLabsShop.cart.CartItem;
 import swagLabsShop.inventory.InventoryAction;
+import swagLabsShop.inventory.ProductList;
 import swagLabsShop.menuBar.MenuAction;
 import swagLabsShop.navigation.NavigateTo;
+import swagLabsShop.sorting.SortAction;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,6 +35,10 @@ public class SearchStepDefinitions {
     LoginPageObject loginPageObject;
     @Steps
     MenuAction menuAction;
+    @Steps
+    SortAction sortAction;
+    @Steps
+    ProductList productList;
 
     @Given("User open the shop page")
     public void i_am_on_the_shop_page() {
@@ -125,27 +134,56 @@ public class SearchStepDefinitions {
 
     @Given("Click on dropdown list")
     public void clickOnDropdownList() {
+        sortAction.clickOnDropdown();
     }
 
     @When("Select {string}")
     public void select(String sortingType) {
+        sortAction.selectSortingBy(sortingType);
     }
 
     @Then("All products should be sorted reverse alphabetical order")
     public void allProductShouldBeSortedReverseAlphabeticalOrder() {
+        var currentProductList = productList.getListOfProductsNameOnPage();
+        List<String> sortedWords = new ArrayList<>(currentProductList);
+        sortedWords.sort(Collections.reverseOrder());
+        boolean isSorted = currentProductList.equals(sortedWords);
+
+        Serenity.reportThat("Check if product list is sorted in correctly order after change", () ->
+                assertThat(isSorted).isTrue());
     }
 
     @Then("All products should be sorted alphabetical")
     public void allProductsShouldBeSortedAlphabetical() {
+        var currentProductList = productList.getListOfProductsNameOnPage();
+        List<String> sortedWords = new ArrayList<>(currentProductList);
+        Collections.sort(sortedWords);
+        boolean isSorted = currentProductList.equals(sortedWords);
 
+        Serenity.reportThat("Check if product list is sorted in correctly order after change", () ->
+                assertThat(isSorted).isTrue());
     }
 
     @Then("All products should be sorted by lowest price")
     public void allProductsShouldBeSortedByLowestPrice() {
+        var currentProductList = productList.getListOfAllProductsObject();
+        List<CartItem> sortedItem = new ArrayList<>(currentProductList);
+        Collections.sort(sortedItem);
+        boolean isSorted = currentProductList.equals(sortedItem);
+
+        Serenity.reportThat("Check if product list is sorted in correctly order after change", () ->
+                assertThat(isSorted).isTrue());
     }
 
     @Then("All products should be sorted by highest price")
     public void allProductsShouldBeSortedByHighestPrice() {
+        var currentProductList = productList.getListOfAllProductsObject();
+        List<CartItem> sortedItem = new ArrayList<>(currentProductList);
+        sortedItem.sort(Collections.reverseOrder());
+        boolean isSorted = currentProductList.equals(sortedItem);
+
+        Serenity.reportThat("Check if product list is sorted in correctly order after change", () ->
+                assertThat(isSorted).isTrue());
     }
 }
 
