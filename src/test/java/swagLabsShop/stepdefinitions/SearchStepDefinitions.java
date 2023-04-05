@@ -13,8 +13,10 @@ import swagLabsShop.authentication.User;
 import swagLabsShop.cart.CartItem;
 import swagLabsShop.inventory.InventoryAction;
 import swagLabsShop.inventory.ProductList;
+import swagLabsShop.inventory.ViewProductDetailsAction;
 import swagLabsShop.menuBar.MenuAction;
 import swagLabsShop.navigation.NavigateTo;
+import swagLabsShop.product.ProductAction;
 import swagLabsShop.sorting.SortAction;
 
 import java.util.ArrayList;
@@ -39,6 +41,10 @@ public class SearchStepDefinitions {
     SortAction sortAction;
     @Steps
     ProductList productList;
+    @Steps
+    ViewProductDetailsAction viewProductDetails;
+    @Steps
+    ProductAction productAction;
 
     @Given("User open the shop page")
     public void i_am_on_the_shop_page() {
@@ -184,6 +190,15 @@ public class SearchStepDefinitions {
 
         Serenity.reportThat("Check if product list is sorted in correctly order after change", () ->
                 assertThat(isSorted).isTrue());
+    }
+
+    @When("Click on {string}")
+    public void clickOn(String arg0) {
+        productAction.re(arg0);
+    }
+
+    @Then("All data included {string} should be the same as on main page")
+    public void allDataIncludedShouldBeTheSameAsOnMainPage(String arg0) {
     }
 }
 

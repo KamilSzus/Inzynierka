@@ -1,4 +1,4 @@
-package swagLabsShop.inventory;
+package swagLabsShop.product;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementState;

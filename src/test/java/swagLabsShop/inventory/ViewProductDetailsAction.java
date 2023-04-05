@@ -7,6 +7,6 @@ public class ViewProductDetailsAction extends UIInteractionSteps {
 
     @Step("View product details for product '{0}'")
     public void forProductWithName(String productName) {
-        $(ProductList.productDetailsLinkFor(productName)).click();
+        find(ProductList.productDetailsLinkFor(productName));
     }
 }
