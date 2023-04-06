@@ -1,5 +1,7 @@
 package swagLabsShop.stepdefinitions;
 
+import helpers.CsvDataReader;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,6 +21,7 @@ import swagLabsShop.navigation.NavigateTo;
 import swagLabsShop.product.ProductAction;
 import swagLabsShop.sorting.SortAction;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +29,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchStepDefinitions {
-
     @Steps
     NavigateTo navigateTo;
     @Steps
@@ -45,6 +47,14 @@ public class SearchStepDefinitions {
     ViewProductDetailsAction viewProductDetails;
     @Steps
     ProductAction productAction;
+
+    CsvDataReader csvDataReader;
+
+
+    @Before
+    public void setUp() {
+        csvDataReader = new CsvDataReader();
+    }
 
     @Given("User open the shop page")
     public void i_am_on_the_shop_page() {
@@ -194,11 +204,36 @@ public class SearchStepDefinitions {
 
     @When("Click on {string}")
     public void clickOn(String arg0) {
-        productAction.re(arg0);
+        productAction.forProductWithName(arg0);
     }
 
     @Then("All data included {string} should be the same as on main page")
-    public void allDataIncludedShouldBeTheSameAsOnMainPage(String arg0) {
+    public void allDataIncludedShouldBeTheSameAsOnMainPage(String productName) {
+        String path = "C:\\Users\\kamil\\Desktop\\Inzynierka\\src\\test\\resources\\test-data\\ProductsData.csv";
+        try {
+            List<List<String>> data = csvDataReader.readDataFromCSV(path);
+            data.forEach(row -> {
+                String name = row.get(0);
+                if (!productName.equals(name)) {
+                    return;
+                }
+                String description = row.get(1);
+                String price = row.get(2);
+
+                Serenity.reportThat("Check if product name is correct", () ->
+                        assertThat(name).isEqualTo(productAction.productName()));
+
+                Serenity.reportThat("Check if product price is correct", () ->
+                        assertThat(price).isEqualTo(productAction.productPrice().replace("$","")));
+
+                Serenity.reportThat("Check if product description is correct", () ->
+                        assertThat(description).isEqualTo(productAction.productDescription()));
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 

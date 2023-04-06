@@ -21,7 +21,19 @@ public class ProductPageObject extends PageObject {
         return By.xpath("//div[@class='inventory_item'][contains(.,'" + productName + "')]//button");
     }
 
-    public static By test(String productName) {
+    public static By openProduct(String productName) {
         return By.xpath("//div[@class='inventory_item']//div//div//div[contains(string(), '" + productName + "')]/parent::a");
+    }
+
+    public static By getProductNameInDetails(){
+        return By.className("inventory_details_name");
+    }
+
+    public static By getProductDetailsInDetails(){
+        return By.className("inventory_details_desc");
+    }
+
+    public static By getProductPriceInDetails(){
+        return By.className("inventory_details_price");
     }
 }
