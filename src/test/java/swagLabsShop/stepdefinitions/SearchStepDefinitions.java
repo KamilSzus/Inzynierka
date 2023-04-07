@@ -210,7 +210,7 @@ public class SearchStepDefinitions {
 
     @Then("All data included {string} should be the same as on main page")
     public void allDataIncludedShouldBeTheSameAsOnMainPage(String productName) {
-        String path = "C:\\Users\\kamil\\Desktop\\Inzynierka\\src\\test\\resources\\test-data\\ProductsData.csv";
+        String path = "src/test/resources/test-data/ProductsData.csv";
         try {
             List<List<String>> data = csvDataReader.readDataFromCSV(path);
             data.forEach(row -> {
