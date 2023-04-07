@@ -250,5 +250,45 @@ public class SearchStepDefinitions {
     @Then("Image is equal as previous one")
     public void imageIsEqualAsPreviousOne() {
     }
+
+    @When("User adding all products to cart")
+    public void userAddingAllProductsToCart() {
+    }
+
+    @Then("User click on cart icon")
+    public void userClickOnCartIcon() {
+    }
+
+    @Then("All products should be in cart")
+    public void allProductsShouldBeInCart() {
+    }
+
+    @Then("Number of products should be visible on cart icon")
+    public void numberOfProductsShouldBeVisibleOnCartIcon() {
+    }
+
+    @When("User add {string} to cart from product details page")
+    public void userAddToCartFromProductDetailsPage(String arg0) {
+    }
+
+    @Then("Cart should contains {string}")
+    public void cartShouldContains(String arg0) {
+    }
+
+    @When("User add {string} to cart from main page")
+    public void userAddToCartFromMainPage(String arg0) {
+    }
+
+    @When("User delete this product from cart using button in main page")
+    public void userDeleteThisProductFromCartUsingButtonInMainPage() {
+    }
+
+    @Then("Cart should be empty")
+    public void cartShouldBeEmpty() {
+    }
+
+    @When("User delete this product from cart using button in product details page")
+    public void userDeleteThisProductFromCartUsingButtonInProductDetailsPage() {
+    }
 }
 
