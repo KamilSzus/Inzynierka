@@ -2,6 +2,7 @@ package swagLabsShop.stepdefinitions;
 
 import helpers.CsvDataReader;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -224,7 +225,7 @@ public class SearchStepDefinitions {
                         assertThat(name).isEqualTo(productAction.productName()));
 
                 Serenity.reportThat("Check if product price is correct", () ->
-                        assertThat(price).isEqualTo(productAction.productPrice().replace("$","")));
+                        assertThat(price).isEqualTo(productAction.productPrice().replace("$", "")));
 
                 Serenity.reportThat("Check if product description is correct", () ->
                         assertThat(description).isEqualTo(productAction.productDescription()));
@@ -234,6 +235,20 @@ public class SearchStepDefinitions {
             e.printStackTrace();
         }
 
+    }
+
+    @When("Back to all products")
+    public void backToAllProducts() {
+        productAction.backToMainMenu();
+    }
+
+    @When("Click on image of {string}")
+    public void clickOnImageOf(String productName) {
+        productAction.imageForProductWithName(productName);
+    }
+
+    @Then("Image is equal as previous one")
+    public void imageIsEqualAsPreviousOne() {
     }
 }
 

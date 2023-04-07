@@ -16,8 +16,13 @@ public class ProductAction extends UIInteractionSteps {
         $(ProductPageObject.openProduct(productName)).sendKeys(Keys.ENTER);
     }
 
+    @Step("Back to all products")
+    public void backToMainMenu(){
+        find(ProductPageObject.backToAllProductsButton()).click();
+    }
+
     public String productName() {
-        return $(".inventory_details_name").getText();
+        return find(ProductPageObject.getProductNameInDetails()).getText();
     }
 
     public String productPrice() {

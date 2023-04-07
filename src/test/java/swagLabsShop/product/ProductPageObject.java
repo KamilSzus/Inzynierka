@@ -21,6 +21,10 @@ public class ProductPageObject extends PageObject {
         return By.xpath("//div[@class='inventory_item'][contains(.,'" + productName + "')]//button");
     }
 
+    public static By backToAllProductsButton(){
+        return By.id("back-to-products");
+    }
+
     public static By openProduct(String productName) {
         return By.xpath("//div[@class='inventory_item']//div//div//div[contains(string(), '" + productName + "')]/parent::a");
     }
