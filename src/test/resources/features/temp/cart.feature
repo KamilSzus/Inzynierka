@@ -9,9 +9,7 @@ Feature: Cart
 
   Scenario: User add product to cart from main page page
     Given User is login on the main page
-    When Click on "Sauce Labs Backpack"
-    And User add "Sauce Labs Backpack" to cart from product details page
-    And Back to all products
+    When User add "Sauce Labs Backpack" to cart from main page
     Then User click on cart icon
     And Cart should contains "Sauce Labs Backpack"
 

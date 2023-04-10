@@ -17,8 +17,8 @@ public class ProductPageObject extends PageObject {
         return $("//div[@class='inventory_item'][contains(.,'" + productsName + "')]//img").getAttribute("alt");
     }
 
-    public static By productButton(String productName) {
-        return By.xpath("//div[@class='inventory_item'][contains(.,'" + productName + "')]//button");
+    public static By productButton() {
+        return By.xpath("//div[@class='inventory_details_desc_container']//button");
     }
 
     public static By backToAllProductsButton(){

@@ -13,6 +13,7 @@ import org.assertj.core.api.AssertionsForClassTypes;
 import swagLabsShop.authentication.LoginAction;
 import swagLabsShop.authentication.LoginPageObject;
 import swagLabsShop.authentication.User;
+import swagLabsShop.cart.CartAction;
 import swagLabsShop.cart.CartItem;
 import swagLabsShop.inventory.InventoryAction;
 import swagLabsShop.inventory.ProductList;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,13 +50,17 @@ public class SearchStepDefinitions {
     ViewProductDetailsAction viewProductDetails;
     @Steps
     ProductAction productAction;
+    @Steps
+    CartAction cartAction;
 
+    List<CartItem> itemToBuy;
     CsvDataReader csvDataReader;
 
 
     @Before
     public void setUp() {
         csvDataReader = new CsvDataReader();
+        itemToBuy = new ArrayList<>();
     }
 
     @Given("User open the shop page")
@@ -253,42 +259,82 @@ public class SearchStepDefinitions {
 
     @When("User adding all products to cart")
     public void userAddingAllProductsToCart() {
+        List<CartItem> listOfProducts = productList.getListOfAllProductsObject();
+
+        listOfProducts.forEach(cartItem -> cartAction.addItem(cartItem.title()));
+        itemToBuy = listOfProducts;
     }
 
     @Then("User click on cart icon")
     public void userClickOnCartIcon() {
+        cartAction.openCart();
     }
 
     @Then("All products should be in cart")
     public void allProductsShouldBeInCart() {
+        itemToBuy.forEach(
+                productName -> Serenity.reportThat("Cart should contains " + productName.title(),
+                        () -> assertThat(productList.checkIfCartContains(productName.title())).isEqualTo(productName.title()))
+        );
     }
 
     @Then("Number of products should be visible on cart icon")
     public void numberOfProductsShouldBeVisibleOnCartIcon() {
+        Serenity.reportThat("In The shopping cart should be " + itemToBuy.size() + " items",
+                () -> assertThat(cartAction.checkNumberOfProductsInCartIcon()).isEqualTo(String.valueOf(itemToBuy.size())));
+
     }
 
     @When("User add {string} to cart from product details page")
-    public void userAddToCartFromProductDetailsPage(String arg0) {
+    public void userAddToCartFromProductDetailsPage(String product) {
+        productAction.addProduct(product);
+
+        String description = productAction.productDescription();
+        double price = Double.parseDouble(productAction.productPrice().replace("$",""));
+
+        itemToBuy.add(new CartItem(product, description, price));
     }
 
     @Then("Cart should contains {string}")
-    public void cartShouldContains(String arg0) {
+    public void cartShouldContains(String product) {
+        AtomicBoolean ifContainsProduct = new AtomicBoolean(false);
+
+        itemToBuy.forEach(cartItem -> {
+                    if (cartItem.title().equals(product)) {
+                        ifContainsProduct.set(true);
+                    }
+                }
+        );
+
+        Serenity.reportThat("In The shopping cart should be " + product,
+                () -> assertThat(ifContainsProduct).isTrue());
     }
 
     @When("User add {string} to cart from main page")
-    public void userAddToCartFromMainPage(String arg0) {
+    public void userAddToCartFromMainPage(String product) {
+        cartAction.addItem(product);
+
+        String description = productList.getProductDescriptionMainPage(product);
+        double price = Double.parseDouble(productList.getProductPriceMainPage(product).replace("$",""));
+
+        itemToBuy.add(new CartItem(product, description, price));
     }
 
     @When("User delete this product from cart using button in main page")
     public void userDeleteThisProductFromCartUsingButtonInMainPage() {
+        cartAction.deleteItem(itemToBuy.remove(0).title());
     }
 
     @Then("Cart should be empty")
     public void cartShouldBeEmpty() {
+        Serenity.reportThat("Shopping cart should be empty",
+                () -> assertThat(itemToBuy.isEmpty()).isTrue());
     }
 
     @When("User delete this product from cart using button in product details page")
     public void userDeleteThisProductFromCartUsingButtonInProductDetailsPage() {
+        //itemToBuy.removeIf(cartItem -> cartItem.title().equals(product));
+        productAction.deleteProduct(itemToBuy.remove(0).title());
     }
 }
 

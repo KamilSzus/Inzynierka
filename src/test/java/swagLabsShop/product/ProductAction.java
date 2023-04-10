@@ -16,6 +16,15 @@ public class ProductAction extends UIInteractionSteps {
         $(ProductPageObject.openProduct(productName)).sendKeys(Keys.ENTER);
     }
 
+    @Step("Add product '{0}' to cart from details page")
+    public void addProduct(String productName) {
+        $(ProductPageObject.productButton()).click();
+    }
+
+    @Step("Delete product '{0}' from cart from details page")
+    public void deleteProduct(String productName) {
+        $(ProductPageObject.productButton()).click();
+    }
     @Step("Back to all products")
     public void backToMainMenu(){
         find(ProductPageObject.backToAllProductsButton()).click();
