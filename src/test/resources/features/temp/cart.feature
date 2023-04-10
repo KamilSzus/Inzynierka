@@ -47,7 +47,7 @@ Feature: Cart
 
   Scenario: User add product A from main page then add product B from details page
     Given User is login on the main page
-    When User add "Sauce Labs Backpack" to cart from product details page
+    When User add "Sauce Labs Backpack" to cart from main page
     And Click on "Sauce Labs Bike Light"
     And User add "Sauce Labs Bike Light" to cart from product details page
     Then User click on cart icon
