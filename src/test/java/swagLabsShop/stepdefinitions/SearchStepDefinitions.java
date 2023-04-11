@@ -15,6 +15,7 @@ import swagLabsShop.authentication.LoginPageObject;
 import swagLabsShop.authentication.User;
 import swagLabsShop.cart.CartAction;
 import swagLabsShop.cart.CartItem;
+import swagLabsShop.checkout.CheckoutAction;
 import swagLabsShop.inventory.InventoryAction;
 import swagLabsShop.inventory.ProductList;
 import swagLabsShop.inventory.ViewProductDetailsAction;
@@ -52,6 +53,8 @@ public class SearchStepDefinitions {
     ProductAction productAction;
     @Steps
     CartAction cartAction;
+    @Steps
+    CheckoutAction checkoutAction;
 
     List<CartItem> itemToBuy;
     CsvDataReader csvDataReader;
@@ -340,6 +343,57 @@ public class SearchStepDefinitions {
     @When("back to main page")
     public void backToMainPage() {
         cartAction.backShopping();
+    }
+
+    @When("User click on checkout button in cart page")
+    public void userClickOnCheckoutButtonInCartPage() {
+        cartAction.goToCheckout();
+    }
+
+    @When("User click on continue button")
+    public void userClickOnContinueButton() {
+        checkoutAction.clickContinueButton();
+    }
+
+    @Then("User should see this error {string}")
+    public void userShouldSeeThisError(String arg0) {
+    }
+
+    @When("User insert own name {string}")
+    public void userInsertOwnName(String name) {
+        checkoutAction.insertName(name);
+    }
+
+    @When("User insert own last name {string}")
+    public void userInsertOwnLastName(String lastName) {
+        checkoutAction.insertLastName(lastName);
+    }
+
+    @When("Insert own data Name: {string}, Last Name: {string}, Postal: {string}")
+    public void insertOwnDataNameLastNamePostal(String name, String lastName, String postalCode) {
+        checkoutAction.insertName(name);
+        checkoutAction.insertLastName(lastName);
+        checkoutAction.insertPostalCode(postalCode);
+    }
+
+    @Then("Checkout: Overview should contain {string}")
+    public void checkoutOverviewShouldContain(String arg0) {
+    }
+
+    @Then("Price of product should be correctly displayed")
+    public void priceOfProductShouldBeCorrectlyDisplayed() {
+    }
+
+    @Then("Checkout: Overview should contain all products")
+    public void checkoutOverviewShouldContainAllProducts() {
+    }
+
+    @And("Click on finish button")
+    public void clickOnFinishButton() {
+    }
+
+    @Then("User should see information about completing order")
+    public void userShouldSeeInformationAboutCompletingOrder() {
     }
 }
 

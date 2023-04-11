@@ -25,6 +25,7 @@ public class ProductAction extends UIInteractionSteps {
     public void deleteProduct(String productName) {
         $(ProductPageObject.productButton()).click();
     }
+
     @Step("Back to all products")
     public void backToMainMenu(){
         find(ProductPageObject.backToAllProductsButton()).click();
