@@ -1,20 +1,13 @@
 package swagLabsShop.cart;
 
 import net.serenitybdd.core.pages.PageObject;
-import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
-@DefaultUrl("https://www.saucedemo.com/cart.html")
 public class CartPageObject extends PageObject {
 
-    private static By CHECKOUT_BUTTON = By.name("checkout");
-    private static By CART_ITEM = By.cssSelector(".cart_item");
-
-    public void checkout() {
-        find(CHECKOUT_BUTTON).click();
-    }
+    private static final By CART_ITEM = By.cssSelector(".cart_item");
 
     public List<CartItem> items() {
         return findAll(CART_ITEM).map(
@@ -24,6 +17,14 @@ public class CartPageObject extends PageObject {
                         priceForm(item.findBy(".inventory_item_price").getText())
                 )
         );
+    }
+
+    public static By continueShopping(){
+        return By.id("continue-shopping");
+    }
+
+    public static By checkout(){
+        return By.name("checkout");
     }
 
     private Double priceForm(String textValue) {

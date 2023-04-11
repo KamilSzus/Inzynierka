@@ -290,7 +290,7 @@ public class SearchStepDefinitions {
         productAction.addProduct(product);
 
         String description = productAction.productDescription();
-        double price = Double.parseDouble(productAction.productPrice().replace("$",""));
+        double price = Double.parseDouble(productAction.productPrice().replace("$", ""));
 
         itemToBuy.add(new CartItem(product, description, price));
     }
@@ -315,7 +315,7 @@ public class SearchStepDefinitions {
         cartAction.addItem(product);
 
         String description = productList.getProductDescriptionMainPage(product);
-        double price = Double.parseDouble(productList.getProductPriceMainPage(product).replace("$",""));
+        double price = Double.parseDouble(productList.getProductPriceMainPage(product).replace("$", ""));
 
         itemToBuy.add(new CartItem(product, description, price));
     }
@@ -335,6 +335,11 @@ public class SearchStepDefinitions {
     public void userDeleteThisProductFromCartUsingButtonInProductDetailsPage() {
         //itemToBuy.removeIf(cartItem -> cartItem.title().equals(product));
         productAction.deleteProduct(itemToBuy.remove(0).title());
+    }
+
+    @When("back to main page")
+    public void backToMainPage() {
+        cartAction.backShopping();
     }
 }
 

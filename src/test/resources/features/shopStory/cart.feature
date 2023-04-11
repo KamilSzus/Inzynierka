@@ -53,3 +53,12 @@ Feature: Cart
     Then User click on cart icon
     And Cart should contains "Sauce Labs Backpack"
     And Cart should contains "Sauce Labs Bike Light"
+
+  Scenario: New user login and check if cart is empty then add some product
+    Given User is login on the main page
+    When User click on cart icon
+    And Cart should be empty
+    And back to main page
+    And User add "Sauce Labs Backpack" to cart from main page
+    Then User click on cart icon
+    And Cart should contains "Sauce Labs Backpack"

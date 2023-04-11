@@ -21,7 +21,7 @@ public class ProductPageObject extends PageObject {
         return By.xpath("//div[@class='inventory_details_desc_container']//button");
     }
 
-    public static By backToAllProductsButton(){
+    public static By backToAllProductsButton() {
         return By.id("back-to-products");
     }
 
@@ -29,15 +29,15 @@ public class ProductPageObject extends PageObject {
         return By.xpath("//div[@class='inventory_item']//div//div//div[contains(string(), '" + productName + "')]/parent::a");
     }
 
-    public static By getProductNameInDetails(){
+    public static By getProductNameInDetails() {
         return By.className("inventory_details_name");
     }
 
-    public static By getProductDetailsInDetails(){
+    public static By getProductDetailsInDetails() {
         return By.className("inventory_details_desc");
     }
 
-    public static By getProductPriceInDetails(){
+    public static By getProductPriceInDetails() {
         return By.className("inventory_details_price");
     }
 }

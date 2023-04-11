@@ -3,6 +3,7 @@ package swagLabsShop.inventory;
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
 import swagLabsShop.cart.CartItem;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,7 +31,7 @@ public class ProductList extends PageObject {
                 .mapToObj(i -> new CartItem(
                         productsName.get(i),
                         productsDescription.get(i),
-                        Double.parseDouble(productsPrice.get(i).replace("$",""))
+                        Double.parseDouble(productsPrice.get(i).replace("$", ""))
                 ))
                 .collect(Collectors.toList());
     }
@@ -51,15 +52,15 @@ public class ProductList extends PageObject {
         return $("//div[@class = 'cart_list']//a[contains(.,'" + productName + "')]").getText();
     }
 
-    public String getProductDescriptionMainPage(String product){
+    public String getProductDescriptionMainPage(String product) {
         return find(By.xpath("//div[@class='inventory_item'][contains(.,'" + product + "')]//div[@class='inventory_item_desc']")).getText();
     }
 
-    public String getProductNameMainPage(String product){
+    public String getProductNameMainPage(String product) {
         return find(By.xpath("//div[@class='inventory_item'][contains(.,'" + product + "')]//div[@class='inventory_item_name']")).getText();
     }
 
-    public String getProductPriceMainPage(String product){
+    public String getProductPriceMainPage(String product) {
         return find(By.xpath("//div[@class='inventory_item'][contains(.,'" + product + "')]//div[@class='inventory_item_price']")).getText();
     }
 

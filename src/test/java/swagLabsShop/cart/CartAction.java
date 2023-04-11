@@ -21,9 +21,20 @@ public class CartAction extends UIInteractionSteps {
     public void deleteItem(String productName) {
         $(ProductList.productButton(productName)).click();
     }
+
     @Step("Add product '{0}' to cart")
     public void addItems(List<String> productNamesList) {
         productNamesList.forEach(this::addItem);
+    }
+
+    @Step("Back to shopping")
+    public void backShopping() {
+        find(CartPageObject.continueShopping()).click();
+    }
+
+    @Step("Go to checkout")
+    public void goToCheckout() {
+        find(CartPageObject.checkout()).click();
     }
 
     public String checkNumberOfProductsInCartIcon() {
@@ -31,6 +42,6 @@ public class CartAction extends UIInteractionSteps {
     }
 
     public String checkIfCartContains(String productName) {
-        return $("//div[@class = 'cart_list']//a[contains(.,'"+productName+"')]").getText();
+        return $("//div[@class = 'cart_list']//a[contains(.,'" + productName + "')]").getText();
     }
 }
