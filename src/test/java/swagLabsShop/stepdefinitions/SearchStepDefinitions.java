@@ -356,7 +356,10 @@ public class SearchStepDefinitions {
     }
 
     @Then("User should see this error {string}")
-    public void userShouldSeeThisError(String arg0) {
+    public void userShouldSeeThisError(String errorMessage) {
+        Serenity.reportThat("Check if error message is equal to \"" + errorMessage + "\" ", () ->
+                AssertionsForClassTypes.assertThat(checkoutAction.getErrorMessageText()).isEqualToIgnoringCase(errorMessage));
+
     }
 
     @When("User insert own name {string}")
@@ -377,19 +380,30 @@ public class SearchStepDefinitions {
     }
 
     @Then("Checkout: Overview should contain {string}")
-    public void checkoutOverviewShouldContain(String arg0) {
+    public void checkoutOverviewShouldContain(String productName) {
+        List<String> listOfProducts = productList.getListOfProductsNameOnPage();
+
+        assertThat(listOfProducts.contains(productName)).isTrue();
     }
 
     @Then("Price of product should be correctly displayed")
     public void priceOfProductShouldBeCorrectlyDisplayed() {
+        List<String> listOfProductsPrice = productList.getListOfProductsPriceOnPage();
+
+        assertThat(listOfProductsPrice.contains(String.valueOf(itemToBuy.get(0).price()))).isTrue();
     }
 
     @Then("Checkout: Overview should contain all products")
     public void checkoutOverviewShouldContainAllProducts() {
+        itemToBuy.forEach(
+                productName -> Serenity.reportThat("Checkout: Overview should contains " + productName.title(),
+                        () -> assertThat(productList.checkIfCartContains(productName.title())).isEqualTo(productName.title()))
+        );
     }
 
     @And("Click on finish button")
     public void clickOnFinishButton() {
+        checkoutAction.clickFinishOverviewButton();
     }
 
     @Then("User should see information about completing order")

@@ -25,4 +25,13 @@ public class CheckoutAction extends UIInteractionSteps {
         find(CheckoutPageObject.continueButton()).click();
     }
 
+    @Step("User finish buying")
+    public void clickFinishOverviewButton(){
+        find(CheckoutPageObject.finishOverviewButton()).click();
+    }
+
+    public String getErrorMessageText() {
+        return find(CheckoutPageObject.getErrorMessage()).getText();
+    }
+
 }
