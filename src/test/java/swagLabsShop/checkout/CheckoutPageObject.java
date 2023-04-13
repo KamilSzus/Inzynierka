@@ -36,4 +36,12 @@ public class CheckoutPageObject extends PageObject {
     public static By getErrorMessage() {
         return (By.cssSelector("h3[data-test='error']"));
     }
+
+    public static By getCompleteHeader(){
+        return By.className("complete-header");
+    }
+
+    public static By getCompleteBody(){
+        return By.className("complete-text");
+    }
 }

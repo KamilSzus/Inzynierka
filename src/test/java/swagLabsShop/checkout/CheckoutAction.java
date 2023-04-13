@@ -34,4 +34,8 @@ public class CheckoutAction extends UIInteractionSteps {
         return find(CheckoutPageObject.getErrorMessage()).getText();
     }
 
+    public String getCompleteHeaderText(){
+        return find(CheckoutPageObject.getCompleteHeader()).getText();
+    }
+
 }

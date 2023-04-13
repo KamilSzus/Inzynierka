@@ -389,8 +389,11 @@ public class SearchStepDefinitions {
     @Then("Price of product should be correctly displayed")
     public void priceOfProductShouldBeCorrectlyDisplayed() {
         List<String> listOfProductsPrice = productList.getListOfProductsPriceOnPage();
-
-        assertThat(listOfProductsPrice.contains(String.valueOf(itemToBuy.get(0).price()))).isTrue();
+        assertThat(listOfProductsPrice).isNotEmpty();
+        assertThat(listOfProductsPrice.stream().anyMatch(
+                s -> s.replace("$","")
+                        .equals(String.valueOf(itemToBuy.get(0).price())))
+        ).isTrue();
     }
 
     @Then("Checkout: Overview should contain all products")
@@ -408,6 +411,9 @@ public class SearchStepDefinitions {
 
     @Then("User should see information about completing order")
     public void userShouldSeeInformationAboutCompletingOrder() {
+        Serenity.reportThat("information about completing order should be displayed",
+                () -> assertThat(checkoutAction.getCompleteHeaderText()).isEqualTo("Thank you for your order!"));
+
     }
 }
 
