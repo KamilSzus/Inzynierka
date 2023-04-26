@@ -1,8 +1,10 @@
-package swagLabsShop.cart;
+package swagLabsShop.action;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
-import swagLabsShop.inventory.ProductList;
+import swagLabsShop.Pages.CartPageObject;
+import swagLabsShop.Pages.ShoppingCartIcon;
+import swagLabsShop.Pages.ProductList;
 
 import java.util.List;
 

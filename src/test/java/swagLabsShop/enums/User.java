@@ -1,4 +1,4 @@
-package swagLabsShop.authentication;
+package swagLabsShop.enums;
 
 public enum User {
     STANDARD_USER("standard_user", "secret_sauce", "a standard user"),

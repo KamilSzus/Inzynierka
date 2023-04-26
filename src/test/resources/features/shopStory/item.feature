@@ -1,3 +1,4 @@
+@Item
 Feature: Item
 
   Scenario: Click on product image

@@ -1,4 +1,4 @@
-package swagLabsShop.cart;
+package swagLabsShop.records;
 
 import org.jetbrains.annotations.NotNull;
 

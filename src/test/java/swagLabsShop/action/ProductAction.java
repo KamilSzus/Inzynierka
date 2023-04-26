@@ -1,8 +1,9 @@
-package swagLabsShop.product;
+package swagLabsShop.action;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.Keys;
+import swagLabsShop.Pages.ProductPageObject;
 
 public class ProductAction extends UIInteractionSteps {
 

@@ -1,4 +1,4 @@
-package swagLabsShop.product;
+package swagLabsShop.Pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;

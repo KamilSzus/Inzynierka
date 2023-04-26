@@ -1,7 +1,8 @@
-package swagLabsShop.checkout;
+package swagLabsShop.action;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
+import swagLabsShop.Pages.CheckoutPageObject;
 
 public class CheckoutAction extends UIInteractionSteps {
 

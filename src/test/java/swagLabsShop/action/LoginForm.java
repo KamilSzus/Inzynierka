@@ -1,4 +1,4 @@
-package swagLabsShop.authentication;
+package swagLabsShop.action;
 
 import org.openqa.selenium.By;
 

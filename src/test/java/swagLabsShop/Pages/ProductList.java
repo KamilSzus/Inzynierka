@@ -1,8 +1,8 @@
-package swagLabsShop.inventory;
+package swagLabsShop.Pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import org.openqa.selenium.By;
-import swagLabsShop.cart.CartItem;
+import swagLabsShop.records.CartItem;
 
 import java.util.List;
 import java.util.stream.Collectors;

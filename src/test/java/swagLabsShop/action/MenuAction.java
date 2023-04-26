@@ -1,7 +1,8 @@
-package swagLabsShop.menuBar;
+package swagLabsShop.action;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
+import swagLabsShop.Pages.MenuPageObject;
 
 public class MenuAction extends UIInteractionSteps {
 

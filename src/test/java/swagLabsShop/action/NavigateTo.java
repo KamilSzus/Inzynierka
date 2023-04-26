@@ -1,6 +1,7 @@
-package swagLabsShop.navigation;
+package swagLabsShop.action;
 
 import net.thucydides.core.annotations.Step;
+import swagLabsShop.Pages.SourceDemoHomePage;
 
 public class NavigateTo {
 

@@ -1,7 +1,8 @@
-package swagLabsShop.sorting;
+package swagLabsShop.action;
 
 import net.serenitybdd.core.steps.UIInteractionSteps;
 import net.thucydides.core.annotations.Step;
+import swagLabsShop.Pages.SortPageObject;
 
 public class SortAction extends UIInteractionSteps {
 

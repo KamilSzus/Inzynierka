@@ -1,3 +1,4 @@
+@Authentication
 Feature: Authentication
 
   Scenario: Login to the shop page

@@ -1,4 +1,4 @@
-package swagLabsShop.navigation;
+package swagLabsShop.Pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;

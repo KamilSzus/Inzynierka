@@ -1,3 +1,4 @@
+@Cart
 Feature: Cart
 
   Scenario: User add all products to cart

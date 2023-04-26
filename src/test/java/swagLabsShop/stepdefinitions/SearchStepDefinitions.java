@@ -10,19 +10,18 @@ import net.serenitybdd.core.Serenity;
 import net.serenitybdd.screenplay.actions.Browser;
 import net.thucydides.core.annotations.Steps;
 import org.assertj.core.api.AssertionsForClassTypes;
-import swagLabsShop.authentication.LoginAction;
-import swagLabsShop.authentication.LoginPageObject;
-import swagLabsShop.authentication.User;
-import swagLabsShop.cart.CartAction;
-import swagLabsShop.cart.CartItem;
-import swagLabsShop.checkout.CheckoutAction;
-import swagLabsShop.inventory.InventoryAction;
-import swagLabsShop.inventory.ProductList;
-import swagLabsShop.inventory.ViewProductDetailsAction;
-import swagLabsShop.menuBar.MenuAction;
-import swagLabsShop.navigation.NavigateTo;
-import swagLabsShop.product.ProductAction;
-import swagLabsShop.sorting.SortAction;
+import swagLabsShop.action.LoginAction;
+import swagLabsShop.Pages.LoginPageObject;
+import swagLabsShop.enums.User;
+import swagLabsShop.action.CartAction;
+import swagLabsShop.records.CartItem;
+import swagLabsShop.action.CheckoutAction;
+import swagLabsShop.action.InventoryAction;
+import swagLabsShop.Pages.ProductList;
+import swagLabsShop.action.MenuAction;
+import swagLabsShop.action.NavigateTo;
+import swagLabsShop.action.ProductAction;
+import swagLabsShop.action.SortAction;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,8 +46,6 @@ public class SearchStepDefinitions {
     SortAction sortAction;
     @Steps
     ProductList productList;
-    @Steps
-    ViewProductDetailsAction viewProductDetails;
     @Steps
     ProductAction productAction;
     @Steps

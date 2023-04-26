@@ -1,3 +1,4 @@
+@Sort
 Feature: Sort product
 
   Scenario: Sorting product by name

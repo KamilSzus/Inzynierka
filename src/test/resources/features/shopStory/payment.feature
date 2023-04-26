@@ -1,3 +1,4 @@
+@Payment
 Feature: Payment
 
   Scenario: User add product to cart then try buy it without passing first name
