@@ -13,8 +13,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <serenity.version>3.5.1</serenity.version>
     <encoding>UTF-8</encoding>
-    <tags></tags>
-    <webdriver.base.url></webdriver.base.url>
   </properties>
   <dependencies>
     <dependency>
@@ -97,9 +95,6 @@
             <include>**/*TestSuite.java</include>
             <include>**/When*.java</include>
           </includes>
-          <systemPropertyVariables>
-            <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-          </systemPropertyVariables>
           <parallel>classes</parallel>
           <parallel>methods</parallel>
           <useUnlimitedThreads>true</useUnlimitedThreads>
@@ -126,9 +121,6 @@
         <groupId>net.serenity-bdd.maven.plugins</groupId>
         <artifactId>serenity-maven-plugin</artifactId>
         <version>${serenity.version}</version>
-        <configuration>
-          <tags>${tags}</tags>
-        </configuration>
         <executions>
           <execution>
             <id>serenity-reports</id>
