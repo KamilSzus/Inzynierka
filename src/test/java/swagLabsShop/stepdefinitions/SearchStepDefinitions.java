@@ -218,7 +218,7 @@ public class SearchStepDefinitions {
     public void allDataIncludedShouldBeTheSameAsOnMainPage(String productName) {
         String path = "src/test/resources/test-data/ProductsData.csv";
         try {
-            List<List<String>> data = csvDataReader.readDataFromCSV(path);
+            List<List<String>> data = csvDataReader.readDataFromCSV(path, '|', true);
             data.forEach(row -> {
                 String name = row.get(0);
                 if (!productName.equals(name)) {
@@ -388,7 +388,7 @@ public class SearchStepDefinitions {
         List<String> listOfProductsPrice = productList.getListOfProductsPriceOnPage();
         assertThat(listOfProductsPrice).isNotEmpty();
         assertThat(listOfProductsPrice.stream().anyMatch(
-                s -> s.replace("$","")
+                s -> s.replace("$", "")
                         .equals(String.valueOf(itemToBuy.get(0).price())))
         ).isTrue();
     }

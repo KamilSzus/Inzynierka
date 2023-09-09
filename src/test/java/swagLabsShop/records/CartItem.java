@@ -8,3 +8,4 @@ public record CartItem(String title, String description, double price) implement
         return Double.compare(price, o.price());
     }
 }
+
